@@ -18,9 +18,36 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Hello world!</title>
+    <title>Kelloggs Finest Eatz</title>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Grub-Global-Hub</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/new">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logins/new">Sign In</a>
+                </li>
+            </ul>
+            <% if @current_user %>
+                <ul class="navbar-nav ml-auto">
+                    <li class="navbar-text">
+                        Logged in as <%= @current_user[:name] %>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            <% end %>
+        </div>
+    </nav>
 
     <div class="container mt-5">
       <%= yield %>
