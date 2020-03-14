@@ -14,5 +14,72 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 
-events_table = DB.from(:events)
-rsvps_table = DB.from(:rsvps)
+places_table = DB.from(:places)
+comments_table = DB.from(:comments)
+users_table = DB.from(:users)
+
+before do
+    @current_user = users_table.where(id: session["user_id"]).to_a[0]
+end
+
+get "/" do
+    puts places_table.all
+    @places = places_table.all.to_a
+    view "places"
+end
+
+get "/places/:id" do
+    @place = places_table.where(id: params[:id]).to_a[0]
+    @comments = comments_table.where(place_id: @place[:id])
+    @going_count = comments_table.where(place_id: @place[:id], going: true).count
+    @users_table = users_table
+    view "place"
+end
+
+get "/places/:id/comments/new" do
+    @place = places_table.where(id: params[:id]).to_a[0]
+    view "new_comment"
+end
+
+get "/places/:id/comments/create" do
+    puts params
+    @place = places_table.where(id: params["id"]).to_a[0]
+    comments_table.insert(place_id: params["id"],
+                       user_id: session["user_id"],
+                       going: params["going"],
+                       comments: params["comments"])
+    view "create_comment"
+end
+
+get "/users/new" do
+    view "new_user"
+end
+
+post "/users/create" do
+    puts params
+    hashed_password = BCrypt::Password.create(params["password"])
+    users_table.insert(name: params["name"], email: params["email"], password: hashed_password)
+    view "create_user"
+end
+
+get "/logins/new" do
+    view "new_login"
+end
+
+post "/logins/create" do
+    user = users_table.where(email: params["email"]).to_a[0]
+    puts BCrypt::Password::new(user[:password])
+    if user && BCrypt::Password::new(user[:password]) == params["password"]
+        session["user_id"] = user[:id]
+        @current_user = user
+        view "create_login"
+    else
+        view "create_login_failed"
+    end
+end
+
+get "/logout" do
+    session["user_id"] = nil
+    @current_user = nil
+    view "logout"
+end

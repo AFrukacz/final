@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h2>
+            <i class="far fa-calendar-alt"></i>
+            <%= @place[:date] %>
+        </h2>
+        <h1><%= @place[:title] %></h1>
+        <p><%= @place[:description] %></p>
+        <% for comment in @comments %>
+            <div class="media">
+                <% if comment[:going] %>
+                    <i class="fas fa-thumbs-up fa-3x mr-3"></i>
+                <% else %>
+                    <i class="fas fa-thumbs-down fa-3x mr-3"></i>
+                <% end %>
+                <div class="media-body">
+                    <h5 class="mt-0"><%= @users_table.where(id: comment[:user_id]).to_a[0][:name] %></h5>
+                    <%= comment[:comments] %>
+                </div>
+            </div>
+        <% end %>
+        <p class="mt-5">
+            <% if @current_user %>
+                <a href="/places/<%= @place[:id] %>/comments/new" class="btn btn-primary">comment now!</a>
+            <% else %>
+                <a href="/logins/new" class="btn btn-danger">Please sign in to comment</a>
+            <% end %>
+        </p>
+    </div>
+    <div class="col-sm-3">
+        <h3>When?</h3>
+        <p><%= @place[:date] %></p>
+        <h3>Where?</h3>
+        <p><%= @place[:location] %></p>
+        <h3>How many guests so far?</h3>
+        <p><%= @going_count %></p>
+    </div>
+</div>
