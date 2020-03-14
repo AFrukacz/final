@@ -1,0 +1,5 @@
+<h1>All Eatz</h1>
+
+<% for place in @places %>
+    <p><a href="/places/<%= place[:id] %>"><%= place[:title] %></a></p>
+<% end %>
