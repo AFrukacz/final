@@ -1,20 +1,9 @@
-<h2>
-    <i class="far fa-calendar-alt"></i>
-    <%= @place[:date] %>
-</h2>
-<h1>comment for <%= @place[:title] %></h1>
+<h1>Comment on <%= @place[:title] %></h1>
 
 <form action="/places/<%= @place[:id] %>/comments/create">
   <div class="form-group">
-    <label>Are you going?</label>
-    <select class="form-control" name="going">
-      <option value="1">Yes</option>
-      <option value="0">No</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Comments</label>
+    <label>How was your experience?</label>
     <textarea class="form-control" rows="3" name="comments"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-outline-primary">Submit</button>
 </form>

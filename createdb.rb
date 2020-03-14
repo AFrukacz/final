@@ -9,14 +9,12 @@ DB.create_table! :places do
   primary_key :id
   String :title
   String :description, text: true
-  String :date
   String :location
 end
 DB.create_table! :comments do
   primary_key :id
   foreign_key :places_id
   foreign_key :user_id
-  Boolean :going
   String :comments, text: true
 end
 DB.create_table! :users do
@@ -31,12 +29,12 @@ places_table = DB.from(:places)
 
 places_table.insert(title: "The BK Lounge", 
                     description: "The ONLY place for late night eats.",
-                    location: "1740 Orrington Rd")
+                    location: "1740 Orrington Rd, Evanston, IL 60201")
 
 places_table.insert(title: "Bat 17", 
                     description: "Sandwiches, beers, and BIGGER sandwiches",
-                    location: "1709 Benson Ave")
+                    location: "1709 Benson Ave, Evanston, IL 60201")
 
 places_table.insert(title: "Buffalo Joe's", 
                     description: "North Side's best wings! Period.",
-                    location: "812 Clark St")                    
+                    location: "812 Clark St, Evanston, IL 60201")                    

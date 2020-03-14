@@ -5,6 +5,7 @@ GEM
     bcrypt (3.1.13)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
+    geocoder (1.6.1)
     jwt (2.2.1)
     mini_portile2 (2.4.0)
     multi_json (1.14.1)
@@ -43,6 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  geocoder
   pg
   sequel
   sinatra
