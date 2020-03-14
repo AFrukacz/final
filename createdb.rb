@@ -13,8 +13,10 @@ DB.create_table! :places do
 end
 DB.create_table! :comments do
   primary_key :id
-  foreign_key :places_id
+  foreign_key :place_id
   foreign_key :user_id
+  String :name
+  String :email
   String :comments, text: true
 end
 DB.create_table! :users do

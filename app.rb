@@ -38,12 +38,12 @@ get "/places/:id" do
 end
 
 # geocode
-    results = Geocoder.search(@place[:location])
-    @georesults = results.first.coordinates # => [lat, long]
-    @lat = @georesults[0]
-    @long = @georesults[1]
-    @lat_long = "#{@lat},#{@long}"
-    view "place"
+    # results = Geocoder.search(@place[:location])
+    # @georesults = results.first.coordinates # => [lat, long]
+    # @lat = @georesults[0]
+    # @long = @georesults[1]
+    # @lat_long = "#{@lat},#{@long}"
+    # view "place"
 
 # comment form 
     get "/places/:id/comments/new" do
@@ -66,7 +66,7 @@ get "/users/new" do
     view "new_user"
 end
 
-#login info below this
+#login info belowis
 post "/users/create" do
     puts params
     hashed_password = BCrypt::Password.create(params["password"])

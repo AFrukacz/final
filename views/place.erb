@@ -1,16 +1,15 @@
 <div class="row">
     <div class="col-sm-9">
         <h2>
-            <i class="fas fa-hamburger"></i>
-            <%= @place[:date] %>
+            <i class="far fa-calendar-alt"></i>
         </h2>
         <h1><%= @place[:title] %></h1>
         <p><%= @place[:description] %></p>
         <p class="mt-5">
             <% if @current_user %>
-                <a href="/places/<%= @place[:id] %>/comments/new" class="btn btn-outline-primary">comment now!</a>
+                <a href="/places/<%= @place[:id] %>/comments/new" class="btn btn-primary">comment now!</a>
             <% else %>
-                <a href="/logins/new" class="btn btn--outlinedanger">Please sign in to comment</a>
+                <a href="/logins/new" class="btn btn-danger">Please sign in to comment</a>
             <% end %>
         </p>
     </div>
